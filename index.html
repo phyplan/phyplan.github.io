@@ -152,16 +152,6 @@
     <!--/ Abstract. -->
 
     <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe width="560" height="315" src="https://1drv.ms/v/s!AjIGOzSicYxmgQvXm88ZhoUywC7j?e=0Hrb8yU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
-  </div>
 </section>
 
 <section class="section">
@@ -183,21 +173,48 @@
         </div>
       </div>
 
-      <div class="column">
-        <h3 class="title is-4">Slide Task </h3>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              Model is trained on instructions up to 2 steps. It generalizes well to multi-step plans, such as this example with a 5-step instruction 
-            </p>
-            <video id="matting-video" autoplay muted loop playsinline height="100%">
-              <source src="./static/videos/v3.mp4"
-                      type="video/mp4">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h3 class="title is-4">Slide Task </h3>
+              <p>Robot trains to slide the puck the goal</p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/video/slide.mp4" type="video/mp4">
             </video>
-            <p class="teaser has-text-centered">
-              Put the blue lego thing to the left of the red lego thing and place the red cube on the left side of the white lego object and move the magenta dice to the right of the green box and move the red box on the left side of the blue lego thing and put the blue lego object to the left of the white lego thing
-            </p>
+          <p class="teaser has-text-centered">
+            Following five trials represents robot eventually slides the puck reach the goal by aliging the pendulum and using physical skills like hitting and sliding.
+          </p>
           </div>
+        </div>
+
+      <div class="columns is-centered">
+
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-4">Launch Task</h3>
+          <p>Robot trains to use pendulum to make the ball reach the goal</p>
+          <video id="matting-video" controls playsinline height="100%">
+            <source src="./static/video/launch.mp4" type="video/mp4">
+          </video>
+          <p class="teaser has-text-centered">
+           Robot learns to correctly align the pendulum's plane and angle to throw the ball into the box. 
+          </p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-4">Bridge Task</h3>
+          <p>Robot trains to use pendulum to make the puck reach the goal</p>
+          <video id="matting-video" controls playsinline height="100%">
+            <source src="./static/video/bridge.mp4" type="video/mp4">
+          </video>
+          <p class="teaser has-text-centered">
+           Over the shown trials robot learns to correctly align pendulum so that the hitting plane pendulum and puck is correctly aligned. Eventually robot effectively use objects like bridge present in environment. These along with multiple physical skills involved in task highlight PhyPlan's adaptability to long-horizon tasks. 
+          </p>
+        </div>
+      </div>
+        
 
         </div>
       </div>
