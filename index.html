@@ -26,8 +26,6 @@
 </head>
 
 <body>
-
-
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
@@ -100,7 +98,6 @@
                   </a>
                 </span>
               </div>
-
             </div>
           </div>
         </div>
@@ -108,16 +105,42 @@
     </div>
   </section>
 
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <h2 class="title has-text-centered is-3">Abstract</h2>
+      <div class="content is-four-fifths has-text-justified">
+        <p>
+          Given the task of positioning a ball-like object to a goal region beyond direct reach, humans can often
+          throw, slide, or rebound objects against the wall to attain the goal. However, enabling robots to reason
+          similarly is non-trivial. Existing methods for physical reasoning are data-hungry and struggle with
+          complexity and uncertainty inherent in the real world. This paper presents PhyPlan, a novel
+          physics-informed planning framework that combines physics-informed neural networks (PINNs) with modified
+          Monte Carlo Tree Search (MCTS) to enable embodied agents to perform dynamic physical tasks. PhyPlan
+          leverages PINNs to simulate and predict outcomes of actions in a fast and accurate manner and uses MCTS
+          for planning. It dynamically determines whether to consult a PINN-based simulator (coarse but fast) or
+          engage directly with the actual environment (fine but slow) to determine optimal policy. Evaluation with
+          robots in simulated 3D environments demonstrates the ability of our approach to solve 3D-physical
+          reasoning tasks involving the composition of dynamic skills. Quantitatively, PhyPlan excels in several
+          aspects: (i) it achieves lower regret when learning novel tasks compared to state-of-the-art, (ii) it
+          expedites skill learning and enhances the speed of physical reasoning, (iii) it demonstrates higher data
+          efficiency compared to a physics un-informed approach. output a manipulation program that can be executed
+          by the robot on the input scene resulting in the desired output scene.
+        </p>
+      </div>
+  </section>
+
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
+        <h2 class="title is-3 has-text-centered">Approach Overview</h2>
         <div class="columns is-centered is-vcentered">
           <!-- Image Column -->
           <div class="column is-half">
             <img src="./static/images/motivation.png" width="1499" height="976" />
           </div>
           <!-- Text Column -->
-          <div class="column is-one-third">
+          <div class="column is-one-third has-text-justified">
             <p>
               Given the task of putting the green ball into the goal region (red box), PhyPlan decomposes the planning
               problem into generating physics-informed priors (using PINN) to facilitate action search using MCTS to
@@ -127,7 +150,7 @@
           </div>
         </div>
         <!-- Subtitle Section -->
-        <div class="has-text-centered">
+        <div class="has-text-justified">
           <h2 class="subtitle">
             <span class="dnerf">PhyPlan</span> is a novel physics-informed planning framework based on accelerated
             learning of Physical Reasoning Tasks using Physics Informed Skill Networks
@@ -135,40 +158,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-
-  <section class="section">
-    <div class="container is-max-desktop">
-      <!-- Abstract. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              Given the task of positioning a ball-like object to a goal region beyond direct reach, humans can often
-              throw, slide, or rebound objects against the wall to attain the goal. However, enabling robots to reason
-              similarly is non-trivial. Existing methods for physical reasoning are data-hungry and struggle with
-              complexity and uncertainty inherent in the real world. This paper presents PhyPlan, a novel
-              physics-informed planning framework that combines physics-informed neural networks (PINNs) with modified
-              Monte Carlo Tree Search (MCTS) to enable embodied agents to perform dynamic physical tasks. PhyPlan
-              leverages PINNs to simulate and predict outcomes of actions in a fast and accurate manner and uses MCTS
-              for planning. It dynamically determines whether to consult a PINN-based simulator (coarse but fast) or
-              engage directly with the actual environment (fine but slow) to determine optimal policy. Evaluation with
-              robots in simulated 3D environments demonstrates the ability of our approach to solve 3D-physical
-              reasoning tasks involving the composition of dynamic skills. Quantitatively, PhyPlan excels in several
-              aspects: (i) it achieves lower regret when learning novel tasks compared to state-of-the-art, (ii) it
-              expedites skill learning and enhances the speed of physical reasoning, (iii) it demonstrates higher data
-              efficiency compared to a physics un-informed approach. output a manipulation program that can be executed
-              by the robot on the input scene resulting in the desired output scene.
-            </p>
-
-          </div>
-        </div>
-      </div>
-      <!--/ Abstract. -->
-
-      <!-- Paper video. -->
   </section>
 
   <section class="section">
@@ -184,7 +173,7 @@
             <video id="matting-video" controls playsinline height="100%">
               <source src="./static/video/bounce.mp4" type="video/mp4">
             </video>
-            <p class="teaser has-text-centered">
+            <p class="teaser has-text-justified">
               In the above five trials, the robot places the wedge at the correct location with the proper orientation,
               throwing the ball from the proper height, accomplishing the ball reaching the goal.
             </p>
@@ -198,7 +187,7 @@
             <video id="matting-video" controls playsinline height="100%">
               <source src="./static/video/slide.mp4" type="video/mp4">
             </video>
-            <p class="teaser has-text-centered">
+            <p class="teaser has-text-justified">
               The following five trials represent the robot eventually sliding the puck to reach the goal by aligning
               the pendulum and using physical skills like hitting and sliding.
             </p>
@@ -212,7 +201,7 @@
             <video id="matting-video" controls playsinline height="100%">
               <source src="./static/video/launch.mp4" type="video/mp4">
             </video>
-            <p class="teaser has-text-centered">
+            <p class="teaser has-text-justified">
               The robot learns to correctly align the pendulum's plane and angle to throw the ball into the box.
             </p>
           </div>
@@ -226,7 +215,7 @@
             <video id="matting-video" controls playsinline height="100%">
               <source src="./static/video/bridge.mp4" type="video/mp4">
             </video>
-            <p class="teaser has-text-centered">
+            <p class="teaser has-text-justified">
               Over the shown trials, the robot learns to correctly align the pendulum so that the hitting plane is
               correctly aligned. Eventually, the robot effectively uses objects like the bridge present in the
               environment. These, along with multiple physical skills involved in the task, highlight PhyPlan's
@@ -248,17 +237,27 @@
           <!-- Image Column -->
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/DQN-1.png" width="400" height="300" />
+            <p class="teaser has-text-centered">
+              Action 1
+            </p>
           </div>
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/DQN-4.png" width="400" height="300" />
+            <p class="teaser has-text-centered">
+              Action 4
+            </p>
           </div>
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/DQN-11.png" width="400" height="300" />
+            <p class="teaser has-text-centered">
+              Action 11
+            </p>
           </div>
         </div>
         <!-- Subtitle Section -->
-        <p class="subtitle">
-          <span class="dnerf">DQN-Adaptive</span> executes actions in sequence while learning the difference in the
+        <p class="subtitle has-text-justified">
+          <span class="dnerf">DQN-Adaptive</span> (Baseline) executes actions in sequence while learning the difference
+          in the
           predicted reward for an action and the actual reward. However, it does not use the bridge even after 11
           attempts which is needed to land the ball further closer to the goal.
         </p>
@@ -268,16 +267,25 @@
           <!-- Image Column -->
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/Phyplan_1.png" width="400" height="300" />
+            <p class="teaser has-text-centered">
+              Action 1
+            </p>
           </div>
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/Phyplan_2.png" width="400" height="300" />
+            <p class="teaser has-text-centered">
+              Action 2
+            </p>
           </div>
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/Phyplan_4.png" width="400" height="300" />
+            <p class="teaser has-text-centered">
+              Action 4
+            </p>
           </div>
         </div>
         <!-- Subtitle Section -->
-        <p class="subtitle">
+        <p class="subtitle has-text-justified">
           <span class="dnerf">PhyPlan</span> executes actions in sequence while learning the difference in the
           predicted reward for an action and the actual reward. It does not use the bridge in the first attempt because
           of errors in prediction. However, it quickly realises the need of the bridge in the second attempt. Further,
