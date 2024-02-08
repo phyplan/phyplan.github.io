@@ -171,9 +171,14 @@
   <section class="section">
     <div class="container is-max-desktop">
       <h2 class="title is-3" style="text-align: center;">Skill Learning</h2>
-      In addressing the challenges associated with learning policy for physical reasoning tasks, our approach instead of direct learning policy, opts for a methodology that segments the learning problem into two distinct phases. Initially, we focus on developing a skill learning model that accurately captures the dynamics of how objects interact with their environment. Subsequently, this model serves as a foundational element for a planning mechanism, enabling the execution of multi-step interactions aimed at achieving specific objectives. 
-      We argue that a well-defined Physics Informed Sikll Networks can significantly enhance the Physical Reasoning agents capability by providing a robust prior, thereby enabling more informed decision-making processes. 
-      We consider the problem of learning a model for physical skills such as bouncing a ball-like object off a wedge, sliding over an object, swinging a pendulum, throwing an object as a projectile and hitting an object with a pendulum. Here, we interpret a physical skill as a model that predicts the state trajectory of an object as it undergoes a dynamic interaction with another object.
+      <p>
+      In addressing the challenges associated with learning policy for physical reasoning tasks, our approach instead of direct learning policy, opts for a methodology that segments the learning problem into two distinct phases. 
+      Initially, we focus on developing a skill learning model that accurately captures the dynamics of how an object interact with other objects in their environment. 
+      Subsequently, this model, Physics Informed Skill Networks, is used in planning, enabling the execution of multi-step interactions aimed at achieving physical reasoning task. 
+      Physics Informed Sikll Networks can significantly enhance the Physical Reasoning agent's capability by providing a robust prior, thereby enabling informed decision-making processes. 
+      We consider the problem of learning a model for physical skills such as bouncing a ball-like object off a wedge, sliding over an object, swinging a pendulum, throwing an object as a projectile and hitting an object with a pendulum. 
+      The skill learning model predicts the state trajectory of an object as it undergoes a dynamic interaction with another objects.
+      </p>
       <div class="columns is-multiline" style="justify-content: center;">
         <div class="column is-one-third" style="display: flex; flex-direction: column; align-items: center;">
           <figure class="image" style="display: flex; justify-content: center; align-items: center; margin: auto;">
@@ -218,6 +223,12 @@
           <p style="text-align: justify;">Skill network learns to determine velocity of ball just after it bounces a
             wedge.</p>
         </div>
+        <p>
+          The skill learning model is based on a neural network that predicts the object's state during dynamic interaction continuously parameterised by time. Such interactions can be simulated in a physics engine by using numerical integration schemes. 
+          However, since we aim to perform multi-step interactions, simulating outcomes during training is often intractable. Hence, we adopt a learning-based approach and learn a function which predicts the object's state during dynamic interaction continuously parameterised by time. 
+          For certain skills like swining, sliding and throwing we levarage the known governing physics equations neural and employ a physics-informed loss function to constrain the latent space in neural network and are called as Physics-Informed Skill Networks. 
+          However, skills like bouncing and hitting are learnt directly from data because of complex and intractable physics of the motion.
+        </p>
       </div>
     </div>
   </section>
