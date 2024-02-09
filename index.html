@@ -32,7 +32,8 @@
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <h1 class="title is-1 publication-title"><span class="dnerf">PhyPlan</span>: Compositional and Adaptive Physical Task Reasoning with
+              <h1 class="title is-1 publication-title"><span class="dnerf">PhyPlan</span>: Compositional and Adaptive
+                Physical Task Reasoning with
                 Physics-Informed Skill Networks for Robot Manipulators</h1>
               <h3 class="title is-4 conference-authors"><a target="_blank" href="https://arxiv.org/">......</a></h3>
               <div class="is-size-5 publication-authors">
@@ -145,13 +146,13 @@
     <div class="container is-max-desktop">
       <div class="hero-body">
         <h2 class="title is-3 has-text-centered">Approach Overview</h2>
-        <div class="columns is-centered is-vcentered">
+        <div class="columns is-centered is-vcentered" , style="max-width: 95%; padding-left: 7%;">
           <!-- Image Column -->
-          <div class="column is-half">
+          <div class="column is-two-third">
             <img src="./static/images/motivation.png" width="1499" height="976" />
           </div>
           <!-- Text Column -->
-          <div class="column is-one-third has-text-justified">
+          <div class="column is-one-third has-text-justified" , style="max-width: 100%;">
             <p>
               Given the task of putting the green ball into the goal region (red box), PhyPlan decomposes the planning
               problem into generating physics-informed priors (using PINN) to facilitate action search using MCTS to
@@ -246,7 +247,30 @@
         </div>
       </div>
       <hr>
-      <div class="has-text-justified">
+      <div class="columns is-centered is-vcentered">
+        <!-- Text Column -->
+        <div class="column is-half has-text-justified">
+          <p>
+            <i><b>The skill learning model is based on a neural network that predicts the object's state during dynamic
+                interaction continuously parameterised by time.</i></b> The figure on the side shows the predicted
+            positions of the ball plotted against time in the Bounce Task. Such interactions can be simulated in a physics engine by using
+            numerical integration schemes.
+            However, since we aim to perform multi-step interactions, simulating outcomes during training is often
+            intractable. Hence, we adopt a learning-based approach and learn a function which predicts the object's
+            state during dynamic interaction continuously parameterised by time.
+            For certain skills like swining, sliding and throwing we levarage the known governing physics equations and
+            employ a physics-informed loss function in neural network to constrain the latent space, these are called as
+            Physics-Informed Skill Networks.
+            However, skills like bouncing and hitting are learnt directly from data because of complex and intractable
+            physics.
+          </p>
+        </div>
+        <!-- Image Column -->
+        <div class="column is-half">
+          <img src="./static/images/bounce_chain_0.5.png" width="1499" height="976" />
+        </div>
+      </div>
+      <!-- <div class="has-text-justified">
         <p>
           The skill learning model is based on a neural network that predicts the object's state during dynamic
           interaction continuously parameterised by time. Such interactions can be simulated in a physics engine by
@@ -260,7 +284,7 @@
           However, skills like bouncing and hitting are learnt directly from data because of complex and intractable
           physics.
         </p>
-      </div>
+      </div> -->
     </div>
   </section>
 
