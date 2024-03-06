@@ -157,16 +157,11 @@
         </div> -->
       </div>
 
-      <div class="container is-max-desktop has-text-justified" , style="max-width: 90%;">
+      <div class="content is-four-fifths has-text-justified">
         <p>
-          In addressing the challenges associated with learning policy for physical reasoning tasks, our approach opts
-          for a methodology that segments the learning problem into two distinct phases, instead of directly learning
-          policy. Initially, we focus on developing a skill learning model that accurately captures the dynamics
-          object's interaction with other objects in their environment. Subsequently, this model, named Physics
-          Informed Skill Network, is used in planning, enabling the execution of multi-step interactions aimed at
-          achieving physical reasoning tasks. Physics Informed Sikll Networks can significantly enhance the Physical
-          Reasoning agent's capability by providing a robust prior, thereby enabling informed decision-making
-          processes.
+          <b>PhyPlan pipeline:</b> The robot learns various skills as pre-trained Physics Informed Neural Networks (PINN). When presented with an unseen task, PhyPlan performs action search using MCTS with rollouts facilitated by learnt skill networks to reach the goal region.
+    PhyPlan generates physics-informed priors via sequential composition of learnt skills (PINN-based rollout) to facilitate action search using MCTS to reach the intended goal region.
+    The robot executes the best-predicted action, and the discrepancy between the predicted and actual reward is learnt as the Gaussian Process. The process repeats, and the robot determines the optimum plan within a few trials.
         </p>
       </div>
     </div>
