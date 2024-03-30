@@ -365,93 +365,6 @@
 
   <section class="section">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Comparison with the Baseline</h2>
-      <div class="column has-text-justified">
-        <p>
-          Below is a qualitative comparison with the baseline "DQN" (adapted from <a href="https://phyre.ai/"
-            class="external-link is-normal">[Bakhtin et al., 2019]</a>) which a Deep Q-Network trained on a set of
-          observation-action-reward triplets minimizing the cross-entropy between the soft prediction and the observed
-          reward. DQN also uses the same algorithm (Gaussian Process) as PhyPlan for online learning (<a href="#tasks">here</a>)
-        </p>
-      </div>
-      <hr>
-      <div class="content">
-        <h3 class="title is-4 has-text-centered"><span class="dnerf">DQN</span></h3>
-        <div class="columns is-centered is-vcentered">
-          <!-- Image Column -->
-          <div class="column is-one-third">
-            <img src="./static/images/bridge_dqn-comp/DQN-1.png" width="400" height="300"
-              style="border-radius: 25px;" />
-            <p class="teaser has-text-centered">
-              <span class="dnerf">DQN</span>: Action 1
-            </p>
-          </div>
-          <div class="column is-one-third">
-            <img src="./static/images/bridge_dqn-comp/DQN-4.png" width="400" height="300"
-              style="border-radius: 25px;" />
-            <p class="teaser has-text-centered">
-              <span class="dnerf">DQN</span>: Action 4
-            </p>
-          </div>
-          <div class="column is-one-third">
-            <img src="./static/images/bridge_dqn-comp/DQN-11.png" width="400" height="300"
-              style="border-radius: 25px;" />
-            <p class="teaser has-text-centered">
-              <span class="dnerf">DQN</span>: Action 11
-            </p>
-          </div>
-        </div>
-        <!-- Subtitle Section -->
-        <p class="teaser has-text-justified">
-          <span class="dnerf">DQN</span> (Baseline) executes actions in sequence while learning the difference
-          in the predicted reward for an action and the actual reward. However, it does not use the bridge even after 11
-          attempts which is needed to land the ball further closer to the goal.
-        </p>
-      </div>
-      <div class="content">
-        <h3 class="title is-4 has-text-centered"><span class="dnerf">PhyPlan</span></h3>
-        <div class="columns is-centered is-vcentered">
-          <!-- Image Column -->
-          <div class="column is-one-third">
-            <img src="./static/images/bridge_dqn-comp/Phyplan_1.png" width="400" height="300"
-              style="border-radius: 25px;" />
-            <p class="teaser has-text-centered">
-              <span class="dnerf">PhyPlan</span>: Action 1
-            </p>
-          </div>
-          <div class="column is-one-third">
-            <img src="./static/images/bridge_dqn-comp/Phyplan_2.png" width="400" height="300"
-              style="border-radius: 25px;" />
-            <p class="teaser has-text-centered">
-              <span class="dnerf">PhyPlan</span>: Action 2
-            </p>
-          </div>
-          <div class="column is-one-third">
-            <img src="./static/images/bridge_dqn-comp/Phyplan_4.png" width="400" height="300"
-              style="border-radius: 25px;" />
-            <p class="teaser has-text-centered">
-              <span class="dnerf">PhyPlan</span>: Action 4
-            </p>
-          </div>
-        </div>
-        <!-- Subtitle Section -->
-        <p class="teaser has-text-justified">
-          <span class="dnerf">PhyPlan</span> executes actions in sequence while learning the difference in the predicted
-          reward for an action and the actual reward. It does not use the bridge in the first attempt because
-          of errors in prediction. However, it quickly realises the need of the bridge in the second attempt. Further,
-          it chooses appropriate actions to land the ball in the goal in just the fourth attempt. Note that the robot
-          learns to use the bridge effectively; a physical reasoning task reported earlier <a
-            href="https://arxiv.org/abs/1907.09620" class="external-link is-normal">[Allen et al., 2020]</a> to be
-          challenging to learn for model-free methods, highlighting PhyPlan’s adaptability to long-horizon tasks.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <hr>
-
-  <section class="section">
-    <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">LLM Baseline Prompting Details</h2>
       <div class="column has-text-justified">
         <p>
@@ -542,6 +455,101 @@ Sanity check 3: How does the orientation angle of the bridge affect the puck's p
   6. Finally, the puck successfully landed in the goal, I'd say 'GOAL'.
 Note: In your response, do not write anything else except the (pendulum's plane angle, pendulum's drop angle, bridge's orientation angle) triplet. Send in tuple FORMAT: (angle 1, angle 2, angle 3). Do not emphasise the answer, just return plain text. Let's begin with an initial guess!
 </code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Comparison with the Baseline</h2>
+      <div class="column has-text-justified">
+        <p>
+          Below is a qualitative comparison with the baselines "DQN" (adapted from <a href="https://phyre.ai/"
+            class="external-link is-normal">[Bakhtin et al., 2019]</a>) and LLM. DQN is a Deep Q-Network trained on a set of
+          observation-action-reward triplets minimizing the cross-entropy between the soft prediction and the observed
+          reward. DQN also uses the same algorithm (Gaussian Process) as PhyPlan for online learning (<a href="#tasks">here</a>)
+        </p>
+      </div>
+      <hr>
+      <div class="content">
+        <img src="./static/images/DQN-vs-LLM-vs-PhyPlan_Bridge.png"
+              style="border-radius: 25px;"/>
+      </div>
+      <!-- <div class="content">
+        <h3 class="title is-4 has-text-centered"><span class="dnerf">DQN</span></h3>
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-one-third">
+            <img src="./static/images/bridge_dqn-comp/DQN-1.png" width="400" height="300"
+              style="border-radius: 25px;" />
+            <p class="teaser has-text-centered">
+              <span class="dnerf">DQN</span>: Action 1
+            </p>
+          </div>
+          <div class="column is-one-third">
+            <img src="./static/images/bridge_dqn-comp/DQN-4.png" width="400" height="300"
+              style="border-radius: 25px;" />
+            <p class="teaser has-text-centered">
+              <span class="dnerf">DQN</span>: Action 4
+            </p>
+          </div>
+          <div class="column is-one-third">
+            <img src="./static/images/bridge_dqn-comp/DQN-11.png" width="400" height="300"
+              style="border-radius: 25px;" />
+            <p class="teaser has-text-centered">
+              <span class="dnerf">DQN</span>: Action 11
+            </p>
+          </div>
+        </div>
+        <p class="teaser has-text-justified">
+          <span class="dnerf">DQN</span> (Baseline) executes actions in sequence while learning the difference
+          in the predicted reward for an action and the actual reward. However, it does not use the bridge even after 11
+          attempts which is needed to land the ball further closer to the goal.
+        </p>
+      </div>
+      <div class="content">
+        <h3 class="title is-4 has-text-centered"><span class="dnerf">PhyPlan</span></h3>
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-one-third">
+            <img src="./static/images/bridge_dqn-comp/Phyplan_1.png" width="400" height="300"
+              style="border-radius: 25px;" />
+            <p class="teaser has-text-centered">
+              <span class="dnerf">PhyPlan</span>: Action 1
+            </p>
+          </div>
+          <div class="column is-one-third">
+            <img src="./static/images/bridge_dqn-comp/Phyplan_2.png" width="400" height="300"
+              style="border-radius: 25px;" />
+            <p class="teaser has-text-centered">
+              <span class="dnerf">PhyPlan</span>: Action 2
+            </p>
+          </div>
+          <div class="column is-one-third">
+            <img src="./static/images/bridge_dqn-comp/Phyplan_4.png" width="400" height="300"
+              style="border-radius: 25px;" />
+            <p class="teaser has-text-centered">
+              <span class="dnerf">PhyPlan</span>: Action 4
+            </p>
+          </div>
+        </div> -->
+        <!-- Subtitle Section -->
+        <p class="teaser has-text-justified">
+          <span class="dnerf">DQN</span> (Baseline) executes actions in sequence while learning the difference
+          in the predicted reward for an action and the actual reward. However, it does not use the bridge even after 11
+          trials which is needed to land the ball further closer to the goal.
+        </p>
+        <p class="teaser has-text-justified">
+          <span class="dnerf">LLM</span> (Baseline) executes actions in sequence while correcting them based on feedback
+          in further trials. It uses the bridge in a few trials but does align the pandulum appropriately even in 10 trials.
+        </p>
+        <p class="teaser has-text-justified">
+          <span class="dnerf">PhyPlan</span> executes actions in sequence while learning the difference in the predicted
+          reward for an action and the actual reward. It does not use the bridge in the first attempt because
+          of errors in prediction. However, it quickly realises the need of the bridge in the second attempt. Further,
+          it chooses appropriate actions to land the ball in the goal in just the fourth attempt. Note that the robot
+          learns to use the bridge effectively; a physical reasoning task reported earlier <a
+            href="https://arxiv.org/abs/1907.09620" class="external-link is-normal">[Allen et al., 2020]</a> to be
+          challenging to learn for model-free methods, highlighting PhyPlan’s adaptability to long-horizon tasks.
+        </p>
       </div>
     </div>
   </section>
