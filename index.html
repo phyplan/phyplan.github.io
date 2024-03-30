@@ -123,6 +123,9 @@
       <span class="dnerf">PhyPlan</span> is a novel physics-informed planning framework based on accelerated
       learning of Physical Reasoning Tasks using Physics Informed Skill Networks.
     </h2>
+    <video id="matting-video" controls playsinline height="100%" style="border-radius: 25px;">
+      <source src="./static/video/PhyPlan_Video.mp4" type="video/mp4">
+    </video>
   </div>
 
   <section class="section">
@@ -361,42 +364,42 @@
       <h2 class="title is-3 has-text-centered">Comparison with the Baseline</h2>
       <div class="column has-text-justified">
         <p>
-          Below is a qualitative comparison with the baseline "DQN-Adaptive" (adapted from <a href="https://phyre.ai/"
+          Below is a qualitative comparison with the baseline "DQN" (adapted from <a href="https://phyre.ai/"
             class="external-link is-normal">[Bakhtin et al., 2019]</a>) which a Deep Q-Network trained on a set of
           observation-action-reward triplets minimizing the cross-entropy between the soft prediction and the observed
-          reward. DQN-Adaptive also uses the same algorithm as PhyPlan for online learning (<a href="#tasks">here</a>)
+          reward. DQN also uses the same algorithm (Gaussian Process) as PhyPlan for online learning (<a href="#tasks">here</a>)
         </p>
       </div>
       <hr>
       <div class="content">
-        <h3 class="title is-4 has-text-centered"><span class="dnerf">DQN-Adaptive</span></h3>
+        <h3 class="title is-4 has-text-centered"><span class="dnerf">DQN</span></h3>
         <div class="columns is-centered is-vcentered">
           <!-- Image Column -->
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/DQN-1.png" width="400" height="300"
               style="border-radius: 25px;" />
             <p class="teaser has-text-centered">
-              <span class="dnerf">DQN-Adaptive</span>: Action 1
+              <span class="dnerf">DQN</span>: Action 1
             </p>
           </div>
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/DQN-4.png" width="400" height="300"
               style="border-radius: 25px;" />
             <p class="teaser has-text-centered">
-              <span class="dnerf">DQN-Adaptive</span>: Action 4
+              <span class="dnerf">DQN</span>: Action 4
             </p>
           </div>
           <div class="column is-one-third">
             <img src="./static/images/bridge_dqn-comp/DQN-11.png" width="400" height="300"
               style="border-radius: 25px;" />
             <p class="teaser has-text-centered">
-              <span class="dnerf">DQN-Adaptive</span>: Action 11
+              <span class="dnerf">DQN</span>: Action 11
             </p>
           </div>
         </div>
         <!-- Subtitle Section -->
         <p class="teaser has-text-justified">
-          <span class="dnerf">DQN-Adaptive</span> (Baseline) executes actions in sequence while learning the difference
+          <span class="dnerf">DQN</span> (Baseline) executes actions in sequence while learning the difference
           in the predicted reward for an action and the actual reward. However, it does not use the bridge even after 11
           attempts which is needed to land the ball further closer to the goal.
         </p>
@@ -437,6 +440,104 @@
             href="https://arxiv.org/abs/1907.09620" class="external-link is-normal">[Allen et al., 2020]</a> to be
           challenging to learn for model-free methods, highlighting PhyPlan’s adaptability to long-horizon tasks.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">LLM Baseline Prompting Details</h2>
+      <div class="column has-text-justified">
+        <p>
+          We investigate the physical reasoning abilities of a Large Language Model (specifically <a href="https://gemini.google.com/" class="external-link is-normal">Google's Gemini-Pro LLM</a>). We initially describe the task setup and ask the LLM to generate the actions. We execute the generated action in the environemnt and reprompt the LLM based with the feedback of where the ball/puck landed with respect to the goal.
+        </p>
+      </div>
+      <hr>
+
+      <div class="content">
+        <h3 class="title is-4 has-text-centered"><span class="dnerf">Launch Task</span></h3>
+        <em>Initial Prompt (Task Description):</em>
+        <div class="columns is-centered is-vcentered"></div>
+<pre><code style="white-space: pre-wrap;">There is a robot and a goal located at {goal_pos} outside the direct reach of the robot. There is a ball that needs to reach the goal. The environment has a fixed pillar over which the ball is resting, and a pendulum hanging over the ball that the robot can orient to hit the ball to throw it to the goal. The robot can orient the pendulum along any vertical plane and choose to drop the pendulum from any angle from the vertical axis. When hit with a pendulum, the puck projectiles and lands far away on the ground.
+Sanity check 1: How does the plane of the pendulum affect the puck's position with respect to the goal?
+Sanity check 2: How does the drop angle of the pendulum affect the puck's position with respect to the goal?
+</code></pre>
+        <em>Feedback Prompt:</em>
+        <div class="columns is-centered is-vcentered"></div>
+<pre><code style="white-space: pre-wrap;">In one line, give the numerical values of the angle to orient the pendulum's plane and the angle to drop the pendulum from (both in decimal radians). The bound for plane orientation angle is ({bnds[0][0]}, {bnds[0][1]}) and that for drop angle with vertical axis is ({bnds[1][0]}, {bnds[1][1]}). I will tell you where the ball landed, and you should modify your answer accordingly till the ball reaches the goal. I have marked the ground into two halves. The goal lies in one half, and the robot and the wedge are at the centre. Thoughout the conversation, remember that my response would be one of these:
+  1. The ball lands in the half not containing goal, I'd say 'WRONG HALF'.
+  2. The ball lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between ball and goal&gt'.
+  3. The ball lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between ball and goal&gt'.
+  4. The ball lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between ball and goal&gt'.
+  5. The ball lands in the correct half and in line but fell short of the goal, I'd say 'FELL SHORT by &lthorizontal distance between ball and goal&gt'.
+  6. Finally, the ball successfully landed in the goal, I'd say 'GOAL'. \
+Note: In your response, do not write anything else except the (pendulum's plane angle, pendulum's drop angle) pair. Send in tuple FORMAT: (angle 1, angle 2). Do not emphasise the answer, just return plain text. Let's begin with an initial guess!
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h3 class="title is-4 has-text-centered"><span class="dnerf">Slide Task</span></h3>
+        <em>Initial Prompt (Task Description):</em>
+        <div class="columns is-centered is-vcentered"></div>
+<pre><code style="white-space: pre-wrap;">There is a robot and a goal located at {goal_pos} outside the direct reach of the robot. There is a puck that needs to reach the goal. The environment has a fixed table over which the puck slides, and a pendulum hanging over the puck that the robot can orient to hit the puck to slide it to the goal. The robot can orient the pendulum along any vertical plane and choose to drop the pendulum from any angle from the vertical axis. When hit with a pendulum, the puck slides on the table.
+Sanity check 1: How does the plane of the pendulum affect the puck's position with respect to the goal?
+Sanity check 2: How does the drop angle of the pendulum affect the puck's position with respect to the goal?
+</code></pre>
+        <em>Feedback Prompt:</em>
+        <div class="columns is-centered is-vcentered"></div>
+<pre><code style="white-space: pre-wrap;">In one line, give the numerical values of the angle to orient the pendulum's plane and the angle to drop the pendulum from (both in decimal radians). The bound for plane orientation angle is ({bnds[0][0]}, {bnds[0][1]}) and that for drop angle with vertical axis is ({bnds[1][0]}, {bnds[1][1]}). I will tell you where the puck landed, and you should modify your answer accordingly till the puck reaches the goal. I have marked the ground into two halves. The goal lies in one half, and the robot and the wedge are at the centre. Thoughout the conversation, remember that my response would be one of these:
+  1. The puck lands in the half not containing goal, I'd say 'WRONG HALF'.
+  2. The puck lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between puck and goal&gt'.
+  3. The puck lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between puck and goal&gt'.
+  4. The puck lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between puck and goal&gt'.
+  5. The puck lands in the correct half and in line but fell short of the goal, I'd say 'FELL SHORT by &lthorizontal distance between puck and goal&gt'.
+  6. Finally, the puck successfully landed in the goal, I'd say 'GOAL'. \
+Note: In your response, do not write anything else except the (pendulum's plane angle, pendulum's drop angle) pair. Send in tuple FORMAT: (angle 1, angle 2). Do not emphasise the answer, just return plain text. Let's begin with an initial guess!
+</code></pre>
+      </div>
+
+      <div class="content">
+        <h3 class="title is-4 has-text-centered"><span class="dnerf">Bounce Task</span></h3>
+        <em>Initial Prompt (Task Description):</em>
+        <div class="columns is-centered is-vcentered"></div>
+<pre><code style="white-space: pre-wrap;">There is a robot and a goal located at {goal_pos} outside the direct reach of the robot. There is a ball that needs to reach the goal. The environment has a wedge (an inclined plane at 45 degrees from the horizontal plane) placed at origin, and the robot can bounce the ball over the wedge to place the ball inside the goal. The height of the wedge centre from the ground is fixed at 0.3 metres. The robot can orient the wedge along any horizontal direction and choose to drop the ball over the wedge from any height. When dropped from a height, the ball bounces on the wedge and lands far away on the ground.
+Sanity check 1: How does the orientation angle of the wedge affect the ball's position with respect to the goal?
+Sanity check 2: How does the drop height of the ball affect the ball's position with respect to the goal?
+</code></pre>
+        <em>Feedback Prompt:</em>
+        <div class="columns is-centered is-vcentered"></div>
+<pre><code style="white-space: pre-wrap;">In one line, give the numerical values of the angle to orient the wedge and the height to drop the ball from in the format (angle in decimal radians, height in meters). The bound for angle is ({bnds[0][0]}, {bnds[0][1]}) and that for height is ({bnds[1][0]}, {bnds[1][1]}). I will tell you where the ball landed, and you should modify your answer accordingly till the ball reaches the goal. I have marked the ground into two halves. The goal lies in one half, and the robot and the wedge are at the centre. Thoughout the conversation, remember that my response would be one of these:
+    1. The ball lands in the half not containing goal, I'd say 'WRONG HALF'.
+    2. The ball lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between ball and goal&gt'.
+    3. The ball lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between ball and goal&gt'.
+    4. The ball lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between ball and goal&gt'.
+    5. The ball lands in the correct half and in line but fell short of the goal, I'd say 'FELL SHORT by &lthorizontal distance between ball and goal&gt'.
+    6. Finally, the ball successfully landed in the goal, I'd say 'GOAL'.
+Note: In your response, do not write anything else except the (angle, height) pair. Send in tuple FORMAT: (angle, height). Do not emphasise the answer, just return plain text. Let's begin with an initial guess!</code></pre>
+      </div>
+
+      <div class="content">
+        <h3 class="title is-4 has-text-centered"><span class="dnerf">Bridge Task</span></h3>
+        <em>Initial Prompt (Task Description):</em>
+        <div class="columns is-centered is-vcentered"></div>
+<pre><code style="white-space: pre-wrap;">There is a robot and a goal located at {goal_pos} outside the direct reach of the robot. There is a puck that needs to reach the goal. The environment has a fixed table over which the puck slides, a movable bridge over which the puck slides and a pendulum that the robot can orient to move the puck towards the goal. The robot can orient the pendulum along any vertical plane, orient the bridge in any horizontal direction and choose to drop the pendulum from any angle from the vertical axis. When hit with a pendulum, the puck slides on the table, then on the bridge and finally projectiles to land far away on the ground.
+Sanity check 1: How does the plane of the pendulum affect the puck's position with respect to the goal?
+Sanity check 2: How does the drop angle of the pendulum affect the puck's position with respect to the goal?
+Sanity check 3: How does the orientation angle of the bridge affect the puck's position with respect to the goal?
+</code></pre>
+        <em>Feedback Prompt:</em>
+        <div class="columns is-centered is-vcentered"></div>
+<pre><code style="white-space: pre-wrap;">In one line, give the numerical values of the angle to orient the pendulum's plane, the angle to orient the bridge and the angle to drop the pendulum from (all in decimal radians). The bound for plane orientation angle is ({bnds[0][0]}, {bnds[0][1]}), that for bridge orientation angle is ({bnds[2][0]}, {bnds[2][1]}), and that for drop angle with vertical axis is ({bnds[1][0]}, {bnds[1][1]}). I will tell you where the puck landed, and you should modify your answer accordingly till the puck reaches the goal. I have marked the ground into two halves. The goal lies in one half, and the robot and the wedge are at the centre. Thoughout the conversation, remember that my response would be one of these:
+  1. The puck lands in the half not containing goal, I'd say 'WRONG HALF'.
+  2. The puck lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between puck and goal&gt'.
+  3. The puck lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between puck and goal&gt'.
+  4. The puck lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between puck and goal&gt'.
+  5. The puck lands in the correct half and in line but fell short of the goal, I'd say 'FELL SHORT by &lthorizontal distance between puck and goal&gt'.
+  6. Finally, the puck successfully landed in the goal, I'd say 'GOAL'.
+Note: In your response, do not write anything else except the (pendulum's plane angle, pendulum's drop angle, bridge's orientation angle) triplet. Send in tuple FORMAT: (angle 1, angle 2, angle 3). Do not emphasise the answer, just return plain text. Let's begin with an initial guess!
+</code></pre>
       </div>
     </div>
   </section>
