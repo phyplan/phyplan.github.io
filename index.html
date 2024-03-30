@@ -535,14 +535,14 @@ Note: In your response, do not write anything else except the (pendulum's plane 
         <!-- Subtitle Section -->
       <!-- </div> -->
       <ol>
-        <li><span class="dnerf">DQN</span> (Baseline) executes actions in sequence while learning the difference
+        <li><b>DQN (Baseline)</b> executes actions in sequence while learning the difference
           in the predicted reward for an action and the actual reward. However, it does not use the bridge even after 11
           trials which is needed to land the ball further closer to the goal.
         </li>
-        <li><span class="dnerf">LLM</span> (Baseline) executes actions in sequence while correcting them based on feedback
+        <li><b>LLM (Baseline)</b> executes actions in sequence while correcting them based on feedback
           in further trials. It uses the bridge in a few trials but does align the pandulum appropriately even in 10 trials.
         </li>
-        <li><span class="dnerf">PhyPlan</span> executes actions in sequence while learning the difference in the predicted
+        <li><b>PhyPlan</b> executes actions in sequence while learning the difference in the predicted
           reward for an action and the actual reward. It does not use the bridge in the first attempt because
           of errors in prediction. However, it quickly realises the need of the bridge in the second attempt. Further,
           it chooses appropriate actions to land the ball in the goal in just the fourth attempt. Note that the robot
