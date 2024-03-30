@@ -533,24 +533,26 @@ Note: In your response, do not write anything else except the (pendulum's plane 
           </div>
         </div> -->
         <!-- Subtitle Section -->
-        <p class="teaser has-text-justified">
-          <span class="dnerf">DQN</span> (Baseline) executes actions in sequence while learning the difference
-          in the predicted reward for an action and the actual reward. However, it does not use the bridge even after 11
-          trials which is needed to land the ball further closer to the goal.
-        </p>
-        <p class="teaser has-text-justified">
-          <span class="dnerf">LLM</span> (Baseline) executes actions in sequence while correcting them based on feedback
-          in further trials. It uses the bridge in a few trials but does align the pandulum appropriately even in 10 trials.
-        </p>
-        <p class="teaser has-text-justified">
-          <span class="dnerf">PhyPlan</span> executes actions in sequence while learning the difference in the predicted
-          reward for an action and the actual reward. It does not use the bridge in the first attempt because
-          of errors in prediction. However, it quickly realises the need of the bridge in the second attempt. Further,
-          it chooses appropriate actions to land the ball in the goal in just the fourth attempt. Note that the robot
-          learns to use the bridge effectively; a physical reasoning task reported earlier <a
-            href="https://arxiv.org/abs/1907.09620" class="external-link is-normal">[Allen et al., 2020]</a> to be
-          challenging to learn for model-free methods, highlighting PhyPlan’s adaptability to long-horizon tasks.
-        </p>
+        <ul>
+          <li><p class="teaser has-text-justified">
+            <span class="dnerf">DQN</span> (Baseline) executes actions in sequence while learning the difference
+            in the predicted reward for an action and the actual reward. However, it does not use the bridge even after 11
+            trials which is needed to land the ball further closer to the goal.
+          </p></li>
+          <li><p class="teaser has-text-justified">
+            <span class="dnerf">LLM</span> (Baseline) executes actions in sequence while correcting them based on feedback
+            in further trials. It uses the bridge in a few trials but does align the pandulum appropriately even in 10 trials.
+          </p></li>
+          <li><p class="teaser has-text-justified">
+            <span class="dnerf">PhyPlan</span> executes actions in sequence while learning the difference in the predicted
+            reward for an action and the actual reward. It does not use the bridge in the first attempt because
+            of errors in prediction. However, it quickly realises the need of the bridge in the second attempt. Further,
+            it chooses appropriate actions to land the ball in the goal in just the fourth attempt. Note that the robot
+            learns to use the bridge effectively; a physical reasoning task reported earlier <a
+              href="https://arxiv.org/abs/1907.09620" class="external-link is-normal">[Allen et al., 2020]</a> to be
+            challenging to learn for model-free methods, highlighting PhyPlan’s adaptability to long-horizon tasks.
+          </p></li>
+        </ul>
       </div>
     </div>
   </section>
