@@ -50,7 +50,8 @@
               <div class="is-size-6 publication-authors" , style="margin-bottom: 8mm;">
                 <!-- <span class="author-block"><sup>1</sup>Work primarily done when at IIT Delhi, </span>
                 <span class="author-block"><sup>2</sup>Affiliated with IIT Delhi, </span> -->
-                <span class="author-block"><sup>*</sup>Equal contribution, </span>
+                <span>Indian Institute of Technology Delhi | </span>
+                <span class="author-block"><sup>*</sup><i>Equal contribution</i>, </span>
                 <!-- <span class="author-block"><sup>#</sup>Indicate equal advising, </span> -->
               </div>
 
@@ -148,7 +149,7 @@
           <!-- Image Column -->
           <div>
             <img src="./static/images/Approach_Overview.png"
-              style="border-radius: 25px; border: 2px solid #555555;" />
+              style="border-radius: 25px; border: none; outline: none; box-shadow: none;" />
           </div>
           <!-- Text Column -->
           </div>
@@ -169,7 +170,8 @@
         <p>
           <strong>Left to Right:</strong> The framework begins by learning dynamics-predictor models for elementary physical skills—such as throwing, sliding, swinging, and collision—using a <strong>Physics-Informed Neural Network (PINN)</strong>. By incorporating coarse physics-based equations directly into its loss function, the network learns to predict both the future trajectory of interacting objects and the domain's latent physical parameters.
         </p>
-        
+      </div>
+      <div class="columns is-centered is-vcentered has-text-justified">
         <p>
           Moving to the planning phase, given a new task and a set of tools, the agent uses <strong>GFlowNets</strong> to sample and iterate over various tool sequences, utilizing the PINN-based dynamics predictors as efficient <strong>proxy-reward models</strong>. To optimize execution, the agent reasons over specific control parameters via <strong>Monte-Carlo Tree Search (MCTS)</strong>. This search employs the <strong>learnt models</strong> (PINN) to rapidly simulate actions—such as the release plane of a pendulum or the orientation of a wedge—faster than a complex high-fidelity physics simulator. Finally, to ensure accuracy, the MCTS periodically conducts rollouts in the high-fidelity simulator (<strong>world model</strong>) and corrects any discrepancies between the PINN-based simulations and reality using a <strong>Gaussian Process (GP) Regressor</strong>.
         </p>
