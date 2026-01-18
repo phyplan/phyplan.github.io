@@ -179,8 +179,9 @@
         <br>
       </div>
       <hr>
+      
       <div class="columns is-multiline" style="justify-content: center;">
-        <div class="column is-one-fourth" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="column is-one-quarter" style="display: flex; flex-direction: column; align-items: center;">
           <figure class="image" style="display: flex; justify-content: center; align-items: center; margin: auto;">
             <img src="./static/gif/slide.gif" alt="GIF 1" style="width: 300px; height: 200px; border-radius: 25px;">
           </figure>
@@ -188,7 +189,8 @@
           <p style="text-align: justify;">Skill network learns to determine the displacement and velocity of a sliding
             box with given initial velocity at any time queried on a rough plane</p>
         </div>
-        <div class="column is-one-fourth" style="display: flex; flex-direction: column; align-items: center;">
+
+        <div class="column is-one-quarter" style="display: flex; flex-direction: column; align-items: center;">
           <figure class="image" style="display: flex; justify-content: center; align-items: center; margin: auto;">
             <img src="./static/gif/projectile.gif" alt="GIF 2"
               style="width: 300px; height: 200px; border-radius: 25px;">
@@ -198,7 +200,8 @@
             with
             Given the initial angle and velocity, at any time queried.</p>
         </div>
-        <div class="column is-one-fourth" style="display: flex; flex-direction: column; align-items: center;">
+
+        <div class="column is-one-quarter" style="display: flex; flex-direction: column; align-items: center;">
           <figure class="image" style="display: flex; justify-content: center; align-items: center; margin: auto;">
             <img src="./static/gif/pendulum.gif" alt="GIF 3" style="width: 300px; height: 200px; border-radius: 25px;">
           </figure>
@@ -206,10 +209,8 @@
           <p style="text-align: justify;">Skill network learns to determine the angular position and angular velocity of
             pendulum at any time queried with given initial angular position.</p>
         </div>
-      </div>
-      <!-- Second Row of GIFs -->
-      <div class="columns is-multiline" style="justify-content: center;">
-        <div class="column is-one-fourth" style="display: flex; flex-direction: column; align-items: center;">
+
+        <div class="column is-one-quarter" style="display: flex; flex-direction: column; align-items: center;">
           <figure class="image" style="display: flex; justify-content: center; align-items: center; margin: auto;">
             <img src="./static/gif/peg.gif" alt="GIF 4" style="width: 300px; height: 200px; border-radius: 25px;">
           </figure>
@@ -217,19 +218,20 @@
           <p style="text-align: justify;">Skill network learns to determine the velocity of the puck just after it gets hit by a
             swinging pendulum.</p>
         </div>
-        <!-- <div class="column is-one-third" style="display: flex; flex-direction: column; align-items: center;">
-          <figure class="image" style="display: flex; justify-content: center; align-items: center; margin: auto;">
-            <img src="./static/gif/bounce.gif" alt="GIF 5" style="width: 300px; height: 200px; border-radius: 25px;">
-          </figure>
-          <h3 class="title is-5" style="text-align: center;">Bouncing Skill</h3>
-          <p style="text-align: justify;">Skill network learns to determine the velocity of the ball just after it bounces a
-            wedge.</p>
-        </div> -->
       </div>
       <hr>
       <div class="columns is-centered is-vcentered">
+        <!-- Image Column -->
+        <div class="column is-half">
+          <img src="./static/images/pinn_network.png" width="1499" height=auto
+            style="border-radius: None; border: None;" />
+        </div>
+        <div class="column is-half">
+          <img src="./static/images/bounce_chain_0.5.png" width="1499" height="976"
+            style="border-radius: 25px; border: 2px solid #000000;" />
+        </div>
         <!-- Text Column -->
-        <div class="column is-half has-text-justified">
+        <div class="column has-text-justified">
           <p>
             <i><b>The skill learning model is based on a neural network that predicts the object's state during dynamic
                 interaction continuously parameterised by time.</i></b> The figure on the side shows the predicted
@@ -245,11 +247,6 @@
             However, skills like bouncing and hitting are learnt directly from data because of the complex and intractable
             physics.
           </p>
-        </div>
-        <!-- Image Column -->
-        <div class="column is-half">
-          <img src="./static/images/bounce_chain_0.5.png" width="1499" height="976"
-            style="border-radius: 25px; border: 2px solid #000000;" />
         </div>
       </div>
       <!-- <div class="has-text-justified">
