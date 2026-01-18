@@ -50,7 +50,7 @@
               <div class="is-size-6 publication-authors" , style="margin-bottom: 8mm;">
                 <!-- <span class="author-block"><sup>1</sup>Work primarily done when at IIT Delhi, </span>
                 <span class="author-block"><sup>2</sup>Affiliated with IIT Delhi, </span> -->
-                <span class="author-block"><sup>*</sup>Indicates equal contribution, </span>
+                <span class="author-block"><sup>*</sup>Equal contribution, </span>
                 <!-- <span class="author-block"><sup>#</sup>Indicate equal advising, </span> -->
               </div>
 
@@ -117,7 +117,7 @@
   <div class="container is-max-desktop has-text-centered">
     <h2 class="subtitle" , style="max-width: 90%; padding-left: 10%;">
       <span class="dnerf">PhyPlan</span> is a novel physics-informed planning framework based on accelerated
-      learning of Physical Reasoning Tasks using Physics Informed Skill Networks.
+      learning of Physical Reasoning Tasks using Physics-Informed Skill Networks.
     </h2>
   </div>
   
@@ -147,7 +147,7 @@
         <div class="columns is-centered is-vcentered" , padding-left: 7%;">
           <!-- Image Column -->
           <div>
-            <img src="./static/images/explainer_diagram.png"
+            <img src="./static/images/Approach_Overview.png"
               style="border-radius: 25px; border: 2px solid #555555;" />
           </div>
           <!-- Text Column -->
@@ -157,14 +157,21 @@
         <!-- <div class="has-text-justified">
           <h2 class="subtitle">
             <span class="dnerf">PhyPlan</span> is a novel physics-informed planning framework based on accelerated
-            learning of Physical Reasoning Tasks using Physics Informed Skill Networks
+            learning of Physical Reasoning Tasks using Physics-Informed Skill Networks
           </h2>
         </div> -->
       
 
       <div class="columns is-centered is-vcentered has-text-justified">
+        <!-- <p>
+          <b>PhyPlan pipeline:</b> Clockwise from top. (1) The robot learns a model of physical skills such as hitting, swinging, sliding, etc., using a Physics-Informed Neural Network (PINN). The network incorporates a coarse physics-governing equation into its loss function and can predict the future trajectory of the interacting object, as well as the latent physical parameters of the domain. Given a new task (2), a Monte-Carlo Tree Search (MCTS) (3) searches for a plan by exploring the space of skill compositions, i.e., sampling over continuous parameters e.g., the height of object release, the angle of a wedge with which the object may collide. Simulating trajectories during physical interaction using a PINN forward pass is faster than simulating rich inter-object dynamics in a high-fidelity physics simulator (with complex physical models). The MCTS plan search (4) periodically balances sampling with the PINNs with occasional rollouts in the high-fidelity simulator. The discrepancy in the reward between (i) predicted by PINN rollouts and rollout in the physics simulator is modelled using a Gaussian Process (GP) that guides the MCTS towards the correct plan.
+        </p> -->
         <p>
-          <b>PhyPlan pipeline:</b> Clockwise from top. (1) The robot learns a model of physical skills such as hitting, swinging, sliding etc. using a Physics-Informed Neural Network (PINN). The network incorporates a coarse physics governing equation in its loss function and can predict the future trajectory of the interacting object as well as the latent physical parameters of the domain. Given a new task (2), a Monte-Carlo Tree Search (MCTS) (3) searches for a plan by exploring the space of skill compositions, i.e., sampling over continuous parameters e.g., the height of object release, the angle of a wedge with which the object may collide. Simulating the trajectories during physical interaction using a forward pass of a PINN is faster than simulating rich inter-object dynamic interactions in a high-fidelity physics simulator (with complex physical models). The MCTS plan search (4) periodically balances sampling with the PINNs with occasional rollouts in the high-fidelity simulator. The discrepancy in the reward between (i) predicted by PINN rollouts and rollout in the physics simulator is modelled using a Gaussian Process (GP) that guides the MCTS towards the correct plan.
+          <strong>Left to Right:</strong> The framework begins by learning dynamics-predictor models for elementary physical skills—such as throwing, sliding, swinging, and collision—using a <strong>Physics-Informed Neural Network (PINN)</strong>. By incorporating coarse physics-based equations directly into its loss function, the network learns to predict both the future trajectory of interacting objects and the domain's latent physical parameters.
+        </p>
+        
+        <p>
+          Moving to the planning phase, given a new task and a set of tools, the agent uses <strong>GFlowNets</strong> to sample and iterate over various tool sequences, utilizing the PINN-based dynamics predictors as efficient <strong>proxy-reward models</strong>. To optimize execution, the agent reasons over specific control parameters via <strong>Monte-Carlo Tree Search (MCTS)</strong>. This search employs the <strong>learnt models</strong> (PINN) to rapidly simulate actions—such as the release plane of a pendulum or the orientation of a wedge—faster than a complex high-fidelity physics simulator. Finally, to ensure accuracy, the MCTS periodically conducts rollouts in the high-fidelity simulator (<strong>world model</strong>) and corrects any discrepancies between the PINN-based simulations and reality using a <strong>Gaussian Process (GP) Regressor</strong>.
         </p>
       </div>
     </div>
