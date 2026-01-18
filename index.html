@@ -50,7 +50,7 @@
               <div class="is-size-6 publication-authors" , style="margin-bottom: 8mm;">
                 <!-- <span class="author-block"><sup>1</sup>Work primarily done when at IIT Delhi, </span>
                 <span class="author-block"><sup>2</sup>Affiliated with IIT Delhi, </span> -->
-                <span>Indian Institute of Technology Delhi | </span>
+                <span>Indian Institute of Technology Delhi &vert </span>
                 <span class="author-block"><sup>*</sup><i>Equal contribution</i>, </span>
                 <!-- <span class="author-block"><sup>#</sup>Indicate equal advising, </span> -->
               </div>
@@ -141,41 +141,29 @@
       </div>
   </section>
 
-  <section class="section">
+  <section class="hero-teaser">
     <div class="container is-max-desktop">
-      <!-- <div class="hero-body"> -->
-        <h2 class="title is-3 has-text-centered">Approach Overview</h2>
-        <div class="columns is-centered is-vcentered" , padding-left: 7%;">
-          <!-- Image Column -->
-          <div>
-            <img src="./static/images/Approach_Overview.png"
-              style="border: none; outline: none; box-shadow: none;" />
-          </div>
-          <!-- Text Column -->
-          </div>
-        </div>
-        <!-- Subtitle Section -->
-        <!-- <div class="has-text-justified">
-          <h2 class="subtitle">
-            <span class="dnerf">PhyPlan</span> is a novel physics-informed planning framework based on accelerated
-            learning of Physical Reasoning Tasks using Physics-Informed Skill Networks
-          </h2>
-        </div> -->
       
-
-      <div class="columns is-centered is-vcentered has-text-justified">
+      <h2 class="title is-3 has-text-centered">Approach Overview</h2>
+      
+      <div class="columns is-centered is-vcentered" style="margin-bottom: 20px;">
+        <div class="column is-full-width has-text-centered">
+          <img src="./static/images/Approach_Overview.png"
+               style="border: none; outline: none; box-shadow: none; width: 100%;" />
+        </div>
+      </div>
+  
+      <div class="content has-text-justified">
         <p>
           <strong>Left to Right:</strong> The framework begins by learning dynamics-predictor models for elementary physical skills—such as throwing, sliding, swinging, and collision—using a <strong>Physics-Informed Neural Network (PINN)</strong>. By incorporating coarse physics-based equations directly into its loss function, the network learns to predict both the future trajectory of interacting objects and the domain's latent physical parameters.
         </p>
-      </div>
-      <div class="columns is-centered is-vcentered has-text-justified">
         <p>
           Moving to the planning phase, given a new task and a set of tools, the agent uses <strong>GFlowNets</strong> to sample and iterate over various tool sequences, utilising the PINN-based dynamics predictors as efficient <strong>proxy-reward models</strong>. To optimise execution, the agent reasons over specific control parameters using <strong> Monte Carlo Tree Search (MCTS)</strong>. This search employs the <strong>learnt models</strong> (PINN) to rapidly simulate actions—such as the release plane of a pendulum or the orientation of a wedge—faster than a complex high-fidelity physics simulator. Finally, to ensure accuracy, the MCTS periodically conducts rollouts in the high-fidelity simulator (<strong>world model</strong>) and corrects any discrepancies between the PINN-based simulations and reality using a <strong>Gaussian Process (GP) Regressor</strong>.
         </p>
-      <!-- </div> -->
+      </div>
+      
     </div>
   </section>
-
 
   <section class="section">
     <div class="container is-max-desktop">
