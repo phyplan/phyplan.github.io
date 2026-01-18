@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-    content="PhyPlan: Generalizable and Rapid Physical Task Planning with Physics-Informed Dynamics Predictors for Robot Manipulators">
+    content="PhyPlan: Learning To Plan Tasks with Generalizable and Rapid Physical Reasoning for Embodied Manipulation">
   <meta name="keywords" content="PhyPlan, PhyPlan">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PhyPlan</title>
@@ -32,7 +32,7 @@
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <h1 class="title is-1 publication-title"><span class="dnerf">PhyPlan</span>: Generalizable and Rapid Physical Task Planning with Physics-Informed Skill Networks for Robot Manipulators</h1>
+              <h1 class="title is-1 publication-title"><span class="dnerf">PhyPlan</span>: Learning To Plan Tasks with Generalizable and Rapid Physical Reasoning for Embodied Manipulation</h1>
               <h3 class="title is-4 conference-authors" style="color: rgb(0, 102, 255);">......</h3>
               <div class="is-size-5 publication-authors" , style="margin-bottom: 5mm;">
                 <span class="author-block">
@@ -127,7 +127,7 @@
       <h2 class="title has-text-centered is-3">Abstract</h2>
       <div class="content is-four-fifths has-text-justified">
         <p>
-          Given the task of positioning a ball-like object to a goal region beyond direct reach, humans can often throw, slide, or rebound objects against the wall to attain the goal. However, enabling robots to reason similarly is non-trivial. Existing methods for physical reasoning are data-hungry and struggle with complexity and uncertainty inherent in the real world. This paper presents PhyPlan, a novel physics-informed planning framework that combines physics-informed neural networks (PINNs) with modified Monte Carlo Tree Search (MCTS) to enable embodied agents to perform dynamic physical tasks. PhyPlan leverages PINNs to simulate and predict outcomes of actions in a fast and accurate manner and uses MCTS for planning. It dynamically determines whether to consult a PINN-based simulator (coarse but fast) or engage directly with the actual environment (fine but slow) to determine optimal policy. Given an unseen task, PhyPlan can infer the sequence of actions and learn the latent parameters, resulting in a generalizable approach that can rapidly learn to perform novel physical tasks. Evaluation with robots in simulated 3D environments demonstrates the ability of our approach to solve 3D-physical reasoning tasks involving the composition of dynamic skills. Quantitatively, PhyPlan excels in several aspects: (i) it achieves lower regret when learning novel tasks compared to the state-of-the-art, (ii) it expedites skill learning and enhances the speed of physical reasoning, (iii) it demonstrates higher data efficiency compared to a physics un-informed approach.
+          Given the task of landing a ball in a goal region beyond direct reach, humans can often throw, slide, or rebound objects against the wall to attain the goal. Enabling robots to replicate such reasoning is non-trivial as it requires multi-step planning and involves a mixture of discrete and continuous action spaces, a sparse and sensitive reward structure, computationally expensive simulations, and an incomplete understanding of the environment's physics. We present PhyPlan, a physics-informed and adaptable planning framework for efficient multi-step physical reasoning. At its core, PhyPlan comprises of Generative Flow Networks (GFlowNets) and Monte Carlo Tree Search (MCTS) to explore and evaluate sequences of object interactions. GFlowNets sample discrete action sequences in proportion to their associated reward, enabling broad and reward-driven exploration of the discrete planning space. MCTS complements this by adaptively balancing the use of a fast but approximate pre-trained physics-informed dynamics predictor and costly but accurate environment rollouts, ensuring both speed and precision in planning. The known and actual physics discrepancy is captured using Gaussian Process Regression. Experiments on benchmark simulated tasks requiring composition of collisions, slides, and rebounds demonstrate that PhyPlan achieves a 45% higher success rate and up to 3x efficiency gains over state-of-the-art model-based reinforcement learning approaches.  
         </p>
       </div>
   </section>
