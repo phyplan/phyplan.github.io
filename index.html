@@ -124,7 +124,7 @@
   <hr>
 
   <div class="container is-max-desktop has-text-centered">
-    <video id="matting-video" controls playsinline height="100%" style="border-radius: 25px;">
+    <video id="matting-video" controls playsinline height="100%" style="border-radius: 25px; border: none; outline: none; box-shadow: none;">
       <source src="./static/video/PhyPlan_Video.mp4" type="video/mp4">
     </video>
   </div>
@@ -187,7 +187,7 @@
           wedge, sliding over an object, swinging a pendulum, throwing an object as a projectile and hitting an object
           with a pendulum.
           The skill learning model predicts the state trajectory of an object as it undergoes a dynamic interaction with
-          another objects.
+          another object.
         </p>
         <br>
       </div>
@@ -207,16 +207,16 @@
               style="width: 300px; height: 200px; border-radius: 25px;">
           </figure>
           <h3 class="title is-5" style="text-align: center;">Throwing Skill</h3>
-          <p style="text-align: justify;">Skill network learns to determine the location and velocity of ball thrown
+          <p style="text-align: justify;">Skill network learns to determine the location and velocity of a ball thrown
             with
-            given initial angle and velocity at any time queried.</p>
+            Given the initial angle and velocity, at any time queried.</p>
         </div>
         <div class="column is-one-third" style="display: flex; flex-direction: column; align-items: center;">
           <figure class="image" style="display: flex; justify-content: center; align-items: center; margin: auto;">
             <img src="./static/gif/pendulum.gif" alt="GIF 3" style="width: 300px; height: 200px; border-radius: 25px;">
           </figure>
           <h3 class="title is-5" style="text-align: center;">Swinging Skill</h3>
-          <p style="text-align: justify;">Skill network learns to determine angular position and angular velocity of
+          <p style="text-align: justify;">Skill network learns to determine the angular position and angular velocity of
             pendulum at any time queried with given initial angular position.</p>
         </div>
       </div>
@@ -227,7 +227,7 @@
             <img src="./static/gif/peg.gif" alt="GIF 4" style="width: 300px; height: 200px; border-radius: 25px;">
           </figure>
           <h3 class="title is-5" style="text-align: center;">Hitting Skill</h3>
-          <p style="text-align: justify;">Skill network learns to determine velocity of puck just after it gets hit by a
+          <p style="text-align: justify;">Skill network learns to determine the velocity of the puck just after it gets hit by a
             swinging pendulum.</p>
         </div>
         <div class="column is-one-third" style="display: flex; flex-direction: column; align-items: center;">
@@ -235,7 +235,7 @@
             <img src="./static/gif/bounce.gif" alt="GIF 5" style="width: 300px; height: 200px; border-radius: 25px;">
           </figure>
           <h3 class="title is-5" style="text-align: center;">Bouncing Skill</h3>
-          <p style="text-align: justify;">Skill network learns to determine velocity of ball just after it bounces a
+          <p style="text-align: justify;">Skill network learns to determine the velocity of the ball just after it bounces a
             wedge.</p>
         </div>
       </div>
@@ -252,10 +252,10 @@
             However, since we aim to perform multi-step interactions, simulating outcomes during training is often
             intractable. Hence, we adopt a learning-based approach and learn a function which predicts the object's
             state during dynamic interaction continuously parameterised by time.
-            For certain skills like swining, sliding and throwing we levarage the known governing physics equations and
-            employ a physics-informed loss function in neural network to constrain the latent space, these are called as
+            For certain skills like swinging, sliding and throwing, we leverage the known governing physics equations and
+            Employ a physics-informed loss function in a neural network to constrain the latent space, these are called as
             Physics-Informed Skill Networks.
-            However, skills like bouncing and hitting are learnt directly from data because of complex and intractable
+            However, skills like bouncing and hitting are learnt directly from data because of the complex and intractable
             physics.
           </p>
         </div>
@@ -268,15 +268,15 @@
       <!-- <div class="has-text-justified">
         <p>
           The skill learning model is based on a neural network that predicts the object's state during dynamic
-          interaction continuously parameterised by time. Such interactions can be simulated in a physics engine by
+          interaction, continuously parameterised by time. Such interactions can be simulated in a physics engine by
           using numerical integration schemes.
           However, since we aim to perform multi-step interactions, simulating outcomes during training is often
           intractable. Hence, we adopt a learning-based approach and learn a function which predicts the object's
           state during dynamic interaction continuously parameterised by time.
-          For certain skills like swining, sliding and throwing we levarage the known governing physics equations and
-          employ a physics-informed loss function in neural network to constrain the latent space, these are called as
+          For certain skills like swinging, sliding and throwing, we leverage the known governing physics equations and
+          employ a physics-informed loss function in a neural network to constrain the latent space; these are called as
           Physics-Informed Skill Networks.
-          However, skills like bouncing and hitting are learnt directly from data because of complex and intractable
+          However, skills like bouncing and hitting are learnt directly from data because of the  complex and intractable
           physics.
         </p>
       </div> -->
@@ -288,16 +288,24 @@
       <h2 class="title is-3 has-text-centered">Physical Reasoning Tasks</h2>
       <div id="tasks" , class="column has-text-justified">
         <p>
-          We created the following four challenging 3D physical reasoning tasks to analyse the performance of PhyPlan,
-          inspired by prior works in simplistic 2D environments presnted in <a href="https://arxiv.org/abs/1907.09620"
+          We created the following five challenging 3D physical reasoning tasks to analyse the performance of PhyPlan,
+          inspired by prior works in simplistic 2D environments presented in <a href="https://arxiv.org/abs/1907.09620"
             class="external-link is-normal">[Allen et al., 2020]</a> and <a href="https://phyre.ai/"
             class="external-link is-normal">[Bakhtin et al., 2019]</a>.
+        </p>
+      </div>
+      <div>
+        <img src="./static/images/benchmark_tasks.png"
+          style="border-radius: 25px; border: 2px solid #555555;" />
+      </div>
+      <div id="tasks" , class="column has-text-justified">
+        <p>
           PhyPlan performs semantic reasoning using PINN-based Skill Models before executing each action in the
-          environemnt (just as Humans think before executing). It also learns the difference between PINN-based rewards
+          environment (just as Humans think before executing). It also learns the difference between PINN-based rewards
           for actions and actual rewards as it executes actions (called online learning). Therefore, it often improves
           in subsequent actions (Just as Humans improve their actions with more trials). The videos show the actions
-          taken by PhyPlan on each task. The effect of online learning is more evident in Bounce and Bridge tasks where
-          the robot fails to perform well in early attempts.
+          taken by PhyPlan on each task. The effect of online learning is more evident in the Bounce and Bridge tasks, where
+          the robot performs poorly in early attempts.
         </p>
       </div>
       <hr>
@@ -306,7 +314,7 @@
           <div class="content">
             <h3 class="title is-4 has-text-centered">Launch Task</h3>
             <p class="has-text-justified">Robot trains to use the pendulum object present in the environment to make the
-              ball reach the goal</p>
+              ball reaches the goal</p>
             <video id="matting-video" controls playsinline height="100%" style="border-radius: 25px;">
               <source src="./static/video/launch.mp4" type="video/mp4">
             </video>
@@ -319,7 +327,7 @@
         <div class="column is-centered is-half">
           <div class="content">
             <h3 class="title is-4 has-text-centered">Slide Task </h3>
-            <p class="has-text-justified">Robot trains to use pendulum object present in the environment to slide the
+            <p class="has-text-justified">Robot trains to use the pendulum object present in the environment to slide the
               puck to the goal</p>
             <video id="matting-video" controls playsinline height="100%" style="border-radius: 25px;">
               <source src="./static/video/slide.mp4" type="video/mp4">
@@ -334,14 +342,14 @@
         <div class="column is-centered is-half">
           <div class="content">
             <h3 class="title is-4 has-text-centered">Bounce Task</h3>
-            <p class="has-text-justified">Robot trains to use wedge object present in the environment to make the ball
+            <p class="has-text-justified">Robot trains to use the wedge object present in the environment to make the ball
               reach the goal</p>
             <video id="matting-video" controls playsinline height="100%" style="border-radius: 25px;">
               <source src="./static/video/bounce.mp4" type="video/mp4">
             </video>
             <p class="teaser has-text-justified">
               In the above five trials, the robot places the wedge at the correct location with the proper orientation,
-              throwing the ball from the proper height, accomplishing the ball reaching the goal.
+              throwing the ball from the proper height, so that the ball reaches the goal.
             </p>
           </div>
         </div>
@@ -388,7 +396,7 @@ Sanity check 2: How does the drop angle of the pendulum affect the puck's positi
         <em>Feedback Prompt:</em>
         <div class="columns is-centered is-vcentered"></div>
 <pre><code style="white-space: pre-wrap;">In one line, give the numerical values of the angle to orient the pendulum's plane and the angle to drop the pendulum from (both in decimal radians). The bound for plane orientation angle is ({bnds[0][0]}, {bnds[0][1]}) and that for drop angle with vertical axis is ({bnds[1][0]}, {bnds[1][1]}). I will tell you where the ball landed, and you should modify your answer accordingly till the ball reaches the goal. I have marked the ground into two halves. The goal lies in one half, and the robot and the wedge are at the centre. Thoughout the conversation, remember that my response would be one of these:
-  1. The ball lands in the half not containing goal, I'd say 'WRONG HALF'.
+  1. The ball lands in the half not containing the goal, I'd say 'WRONG HALF'.
   2. The ball lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between ball and goal&gt'.
   3. The ball lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between ball and goal&gt'.
   4. The ball lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between ball and goal&gt'.
