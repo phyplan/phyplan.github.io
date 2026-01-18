@@ -222,19 +222,8 @@
       </div>
       <hr>
       <div class="columns is-centered is-vcentered">
-        <!-- Image Column -->
-        <div class="column is-half">
-          <img src="./static/images/pinn_network.png" width="1499" height=auto
-            style="border-radius: None; border: None;" />
-        </div>
-        <div class="column is-half">
-          <img src="./static/images/bounce_chain_0.5.png" width="1499" height="976"
-            style="border-radius: 25px; border: 2px solid #000000;" />
-        </div>
-      </div>
-      <div class="columns is-centered is-vcentered">
         <!-- Text Column -->
-        <div class="column has-text-justified">
+        <div class="column is-half has-text-justified">
           <p>
             <i><b>The skill learning model is based on a neural network that predicts the object's state during dynamic
                 interaction continuously parameterised by time.</i></b> The figure on the side shows the predicted
@@ -245,11 +234,17 @@
             intractable. Hence, we adopt a learning-based approach and learn a function which predicts the object's
             state during dynamic interaction continuously parameterised by time.
             For certain skills like swinging, sliding and throwing, we leverage the known governing physics equations and
-            Employ a physics-informed loss function in a neural network to constrain the latent space, these are called as
+            employ a physics-informed loss function in a neural network to constrain the latent space, which is called as
+            For certain skills like swinging, sliding and throwing, we leverage the known governing physics equations and
+            Employ a physics-informed loss function in a neural network to constrain the latent space; these are called as
             Physics-Informed Skill Networks.
-            However, skills like bouncing and hitting are learnt directly from data because of the complex and intractable
-            physics.
+            However, skills like collision detection are learnt directly from data due to the complex, intractable physics.
           </p>
+        </div>
+        <!-- Image Column -->
+        <div class="column is-half">
+          <img src="./static/images/bounce_chain_0.5.png" width="1499" height="976"
+            style="border-radius: 25px; border: 2px solid #000000;" />
         </div>
       </div>
       <!-- <div class="has-text-justified">
