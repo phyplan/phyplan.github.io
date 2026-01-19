@@ -221,28 +221,42 @@
         
       </div>
       <hr>
-      <div class="columns is-centered is-vcentered">
-        <!-- Text Column -->
-        <div class="column is-half has-text-justified">
-          <p>
-            <i><b>The skill learning model is based on a neural network that predicts the object's state during dynamic
-                interaction continuously parameterised by time.</i></b> The figure on the side shows the predicted
-            positions of the ball plotted against time in the Bounce Task. Such interactions can be simulated in a
-            physics engine by using
-            numerical integration schemes.
-            However, since we aim to perform multi-step interactions, simulating outcomes during training is often
-            intractable. Hence, we adopt a learning-based approach and learn a function which predicts the object's
-            state during dynamic interaction continuously parameterised by time.
-            For certain skills like swinging, sliding and throwing, we leverage the known governing physics equations and
-            employ a physics-informed loss function in a neural network to constrain the latent space, which is called as
-            Physics-Informed Dynamics-Predictors.
-            However, skills like collision detection are learnt directly from data due to the complex, intractable physics.
-          </p>
+      <div class="container is-max-desktop">
+        <div class="columns is-centered is-multiline">
+          <div class="column is-one-quarter">
+            <img src="./static/images/bounce_chain_0.5.png" 
+                 style="border-radius: 15px; border: 2px solid #000000; width: 100%;" />
+          </div>
+          <div class="column is-one-quarter">
+            <img src="./static/images/bounce_chain_0.5.png" 
+                 style="border-radius: 15px; border: 2px solid #000000; width: 100%;" />
+          </div>
+          <div class="column is-one-quarter">
+            <img src="./static/images/bounce_chain_0.5.png" 
+                 style="border-radius: 15px; border: 2px solid #000000; width: 100%;" />
+          </div>
+          <div class="column is-one-quarter">
+            <img src="./static/images/bounce_chain_0.5.png" 
+                 style="border-radius: 15px; border: 2px solid #000000; width: 100%;" />
+          </div>
         </div>
-        <!-- Image Column -->
-        <div class="column is-half">
-          <img src="./static/images/bounce_chain_0.5.png" width="1499" height="976"
-            style="border-radius: 25px; border: 2px solid #000000;" />
+      
+        <div class="columns is-centered">
+          <div class="column is-four-fifths has-text-justified">
+            <p>
+              <i><b>The skill learning model is based on a neural network that predicts the object's state during dynamic
+              interaction continuously parameterised by time.</i></b> The figures above show the predicted
+              positions of the ball plotted against time in the Bounce Task. Such interactions can be simulated in a
+              physics engine by using numerical integration schemes.
+              However, since we aim to perform multi-step interactions, simulating outcomes during training is often
+              intractable. Hence, we adopt a learning-based approach and learn a function which predicts the object's
+              state during dynamic interaction continuously parameterised by time.
+              For certain skills like swinging, sliding and throwing, we leverage the known governing physics equations and
+              employ a physics-informed loss function in a neural network to constrain the latent space, which is called as
+              Physics-Informed Dynamics-Predictors.
+              However, skills like collision detection are learnt directly from data due to the complex, intractable physics.
+            </p>
+          </div>
         </div>
       </div>
       <!-- <div class="has-text-justified">
@@ -265,7 +279,7 @@
 
   <section class="section">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Physical Reasoning Tasks</h2>
+      <h2 class="title is-3 has-text-centered">Benchmark Physical Reasoning Tasks</h2>
       <div id="tasks" , class="column has-text-justified">
         <p>
           We created the following five challenging 3D physical reasoning tasks to analyse the performance of PhyPlan,
