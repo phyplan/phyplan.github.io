@@ -160,6 +160,9 @@
         <p>
           Moving to the planning phase, given a new task and a set of tools, the agent uses <strong>GFlowNets</strong> to sample and iterate over various tool sequences, utilising the PINN-based dynamics predictors as efficient <strong>proxy-reward models</strong>. To optimise execution, the agent reasons over specific control parameters using <strong> Monte Carlo Tree Search (MCTS)</strong>. This search employs the <strong>learnt models</strong> (PINN) to rapidly simulate actions—such as the release plane of a pendulum or the orientation of a wedge—faster than a complex high-fidelity physics simulator. Finally, to ensure accuracy, the MCTS periodically conducts rollouts in the high-fidelity simulator (<strong>world model</strong>) and corrects any discrepancies between the PINN-based simulations and reality using a <strong>Gaussian Process (GP) Regressor</strong>.
         </p>
+        <p>
+          The video below provides a consolidated view of the motivation, formulation, and planning in PhyPlan.
+        </p>
       </div>
       
       <div class="container is-max-desktop has-text-centered">
@@ -439,12 +442,12 @@ Sanity check 2: How does the drop height of the ball affect the ball's position 
         <em>Feedback Prompt:</em>
         <div class="columns is-centered is-vcentered"></div>
 <pre><code style="white-space: pre-wrap;">In one line, give the numerical values of the angle to orient the wedge and the height to drop the ball from in the format (angle in decimal radians, height in meters). The bound for angle is ({bnds[0][0]}, {bnds[0][1]}) and that for height is ({bnds[1][0]}, {bnds[1][1]}). I will tell you where the ball landed, and you should modify your answer accordingly till the ball reaches the goal. I have marked the ground into two halves. The goal lies in one half, and the robot and the wedge are at the centre. Thoughout the conversation, remember that my response would be one of these:
-    1. The ball lands in the half not containing goal, I'd say 'WRONG HALF'.
-    2. The ball lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between ball and goal&gt'.
-    3. The ball lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between ball and goal&gt'.
-    4. The ball lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between ball and goal&gt'.
-    5. The ball lands in the correct half and in line but fell short of the goal, I'd say 'FELL SHORT by &lthorizontal distance between ball and goal&gt'.
-    6. Finally, the ball successfully landed in the goal, I'd say 'GOAL'.
+  1. The ball lands in the half not containing goal, I'd say 'WRONG HALF'.
+  2. The ball lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between ball and goal&gt'.
+  3. The ball lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between ball and goal&gt'.
+  4. The ball lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between ball and goal&gt'.
+  5. The ball lands in the correct half and in line but fell short of the goal, I'd say 'FELL SHORT by &lthorizontal distance between ball and goal&gt'.
+  6. Finally, the ball successfully landed in the goal, I'd say 'GOAL'.
 Note: In your response, do not write anything else except the (angle, height) pair. Send in tuple FORMAT: (angle, height). Do not emphasise the answer, just return plain text. Let's begin with an initial guess!</code></pre>
       </div>
 
@@ -475,21 +478,21 @@ Note: In your response, do not write anything else except the (pendulum's plane 
         <em>Initial Prompt (Task Description):</em>
         <div class="columns is-centered is-vcentered"></div>
 <pre><code style="white-space: pre-wrap;">There is a robot and a goal located at {goal_pos} outside the direct reach of the robot. There is a ball that needs to reach the goal. The environment has a fixed pillar over which the ball is resting, a movable wedge (an inclined plane at 45 degrees from the horizontal plane), and a pendulum hanging over the ball that the robot can orient to hit the ball. The robot can orient the pendulum along any vertical plane and choose to drop the pendulum from any angle from the vertical axis. However, the pendulum can only be used to hit the ball in a direction away from the goal, making it impossible to reach the goal directly by the pendulum alone. To solve this, the robot must move and orient the wedge such that the ball bounces off it after being hit by the pendulum, and lands inside the goal. The robot can change the radial distance of the wedge from the origin, the direction of this radial distance (in polar coordinates), and orient the wedge in any horizontal direction.
-        Sanity check 1: How does the drop angle of the pendulum affect the ball's trajectory and its position with respect to the wedge?
-        Sanity check 2: How does the plane of the pendulum affect the ball's trajectory position with respect to the wedge?
-        Sanity check 3: How does the position (radial distance and angle) of the wedge affect the ball's position with respect to the goal?
-        Sanity check 4: How does the orientation angle of the wedge affect the ball's position with respect to the goal?
+Sanity check 1: How does the drop angle of the pendulum affect the ball's trajectory and its position with respect to the wedge?
+Sanity check 2: How does the plane of the pendulum affect the ball's trajectory position with respect to the wedge?
+Sanity check 3: How does the position (radial distance and angle) of the wedge affect the ball's position with respect to the goal?
+Sanity check 4: How does the orientation angle of the wedge affect the ball's position with respect to the goal?
 </code></pre>
         <em>Feedback Prompt:</em>
         <div class="columns is-centered is-vcentered"></div>
 <pre><code style="white-space: pre-wrap;">In one line, give the numerical values of the pendulum's plane angle, pendulum's drop angle, wedge's radial distance from origin, direction angle of this radial distance (in polar form), and wedge's orientation angle (all in decimal radians or meters where applicable). The bound for pendulum plane orientation is ({bnds[0][0]}, {bnds[0][1]}), that for pendulum drop angle is ({bnds[1][0]}, {bnds[1][1]}), that for wedge radial distance is ({bnds[2][0]}, {bnds[2][1]}), that for radial direction angle is ({bnds[3][0]}, {bnds[3][1]}), and that for wedge orientation angle is ({bnds[4][0]}, {bnds[4][1]}). I will tell you where the ball landed, and you should modify your answer accordingly till the ball reaches the goal. I have marked the ground into two halves. The goal lies in one half, and the robot and the wedge are at the centre. Throughout the conversation, remember that my response would be one of these:
-            1. The ball lands in the half not containing goal, I'd say 'WRONG HALF'.
-            2. The ball lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between ball and goal&gt'.
-            3. The ball lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between ball and goal&gt'.
-            4. The ball lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between ball and goal&gt'.
-            5. The ball lands in the correct half and in line but fell short of the goal, I'd say 'FELL SHORT by &lthorizontal distance between ball and goal&gt'.
-            6. Finally, the ball successfully landed in the goal, I'd say 'GOAL'.
-        Note: In your response, do not write anything else except the (pendulum plane angle, pendulum drop angle, wedge radial distance, wedge radial direction, wedge orientation angle) tuple. Send in tuple FORMAT: (angle 1, angle 2, distance, angle 3, angle 4). Do not emphasise the answer, just return plain text. Let's begin with an initial guess!
+  1. The ball lands in the half not containing goal, I'd say 'WRONG HALF'.
+  2. The ball lands in the correct half but left of the goal, I'd say 'LEFT by &lthorizontal distance between ball and goal&gt'.
+  3. The ball lands in the correct half but right of the goal, I'd say 'RIGHT by &lthorizontal distance between ball and goal&gt'.
+  4. The ball lands in the correct half and in line but overshot the goal, I'd say 'OVERSHOT by &lthorizontal distance between ball and goal&gt'.
+  5. The ball lands in the correct half and in line but fell short of the goal, I'd say 'FELL SHORT by &lthorizontal distance between ball and goal&gt'.
+  6. Finally, the ball successfully landed in the goal, I'd say 'GOAL'.
+Note: In your response, do not write anything else except the (pendulum plane angle, pendulum drop angle, wedge radial distance, wedge radial direction, wedge orientation angle) tuple. Send in tuple FORMAT: (angle 1, angle 2, distance, angle 3, angle 4). Do not emphasise the answer, just return plain text. Let's begin with an initial guess!
 </code></pre>
       </div>
     </div>
